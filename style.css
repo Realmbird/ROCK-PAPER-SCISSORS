@@ -1,0 +1,16 @@
+body{
+    display: flex;
+    flex-direction: column;
+}
+.choices{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+.results{
+    text-align: center;
+    align-items: center;
+    padding: 50px;
+}
+

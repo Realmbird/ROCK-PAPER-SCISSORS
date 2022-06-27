@@ -1,5 +1,8 @@
+//sets scores
 let pscore = 0;
 let cscore = 0;
+const result = document.querySelector(".results");
+const score = document.querySelector(".score");
 function computerPlay(){
     let choice = Math.floor(Math.random()*3) + 1;
     switch (choice){
@@ -18,7 +21,7 @@ function computerPlay(){
 }
 function playRound(playerSelection, computerSelection){
         if(playerSelection.toLowerCase() == computerSelection){
-            return `You tie! ${playerSelection} does not beat ${computerSelection}`;  
+            return `You tie!`;  
         }else if(playerSelection.toLowerCase() == "rock"){
             if(computerSelection == "paper"){
                 cscore++;
@@ -59,19 +62,32 @@ function playRound(playerSelection, computerSelection){
             return "Invalid input, please return rock paper or scissors";
         }
     }
-function game(){
-    pscore = 0;
-    cscore = 0; 
-    for(let i = 0; i < 5; i++){
-        let playerSelection = prompt("Rock Paper Scissors");
-        let computerSelection = computerPlay();
-        console.log(playRound(playerSelection, computerSelection));
-    }
-    if(pscore > cscore){
+function updateScore(){
+    let player = "Player: " + pscore;
+    let computer = "Computer: " + cscore;
+    let update = player + "     " + computer;
+    score.textContent = update;
+    if(pscore == 5){
+        result.textContent = "You win!";
         console.log("You win!");
-    }else if(pscore == cscore){
-        console.log("Tie!");
-    }else{
+    }
+    if(cscore == 5){
         console.log("Computer Wins!")
+        result.textContent = "Computer wins!";
     }
 }
+updateScore();
+function play(e){
+    let choice = this.className;
+    result.textContent = playRound(choice, computerPlay());
+    updateScore();
+}
+const rock = document.querySelector(".Rock");
+rock.addEventListener("click", play);
+const paper = document.querySelector(".Paper");
+paper.addEventListener("click", play);
+const scissors = document.querySelector(".Scissors");
+scissors.addEventListener("click", play);
+
+
+
